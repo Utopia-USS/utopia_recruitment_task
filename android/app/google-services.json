@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "903511422207",
+    "project_id": "utopia-recruitment-task",
+    "storage_bucket": "utopia-recruitment-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903511422207:android:95ba2520c4f1900bbd48ca",
+        "android_client_info": {
+          "package_name": "com.utopiaultimate.utopia_recruitment_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903511422207-kudnqsq3imk7clbv1qcpc3da48raf6nr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALOUkoQnmJqBWRNN7oHjsN2XHP5OUKNfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903511422207-kudnqsq3imk7clbv1qcpc3da48raf6nr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
