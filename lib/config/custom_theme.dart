@@ -19,7 +19,7 @@ class CustomTheme {
   static const contentPadding = EdgeInsets.all(spacing);
   static const splashDuration = Duration(seconds: 2);
 
-  static final lightTheme = ThemeData(
+  static final light = ThemeData(
     scaffoldBackgroundColor: greyishBlue,
     appBarTheme: const AppBarTheme(
       backgroundColor: darkBlue,
