@@ -17,7 +17,7 @@ class _NewItemState extends State<NewItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('New Item')),
+      appBar: AppBar(title: const Text('New Item')),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -29,11 +29,11 @@ class _NewItemState extends State<NewItem> {
           child: Column(
             children: [
               _buildNameInput(),
-              SizedBox(height: 12.0),
+              const SizedBox(height: CustomTheme.spacing),
               _buildNoteInput(),
-              SizedBox(height: 12.0),
+              const SizedBox(height: CustomTheme.spacing),
               _buildURLInput(),
-              SizedBox(height: 36.0),
+              const SizedBox(height: CustomTheme.spacing * 3),
               PrimaryButton(
                 title: 'Add new',
                 action: () {},
@@ -51,7 +51,7 @@ class _NewItemState extends State<NewItem> {
       child: TextFormField(
         controller: _nameController,
         keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Name',
         ),
         onChanged: (val) {},
@@ -63,7 +63,7 @@ class _NewItemState extends State<NewItem> {
     return SizedBox(
       child: TextFormField(
         controller: _noteController,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Note',
           alignLabelWithHint: true,
         ),
@@ -81,7 +81,7 @@ class _NewItemState extends State<NewItem> {
       child: TextFormField(
         controller: _urlController,
         keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Url',
         ),
         onChanged: (val) {},

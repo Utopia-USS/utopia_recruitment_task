@@ -8,7 +8,7 @@ class ItemPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Name'),
+        title: const Text('Name'),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -27,7 +27,7 @@ class ItemPage extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text('21.09.2022'),
                 SizedBox(height: 8.0),
                 Text(

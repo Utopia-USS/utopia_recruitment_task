@@ -15,6 +15,7 @@ dependencies:
   formz: ^0.4.1
   equatable: ^2.0.5
   font_awesome_flutter: ^10.2.1
+  another_flushbar: ^1.12.29
 
 dev_dependencies:
   flutter_test:
