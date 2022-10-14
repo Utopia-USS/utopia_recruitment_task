@@ -8,18 +8,20 @@ class CustomTheme {
   static const Color darkGray = Color.fromRGBO(114, 114, 119, 1);
   static const Color darkestGrey = Color.fromRGBO(34, 34, 34, 1);
   static const Color black = Color.fromRGBO(30, 32, 38, 1);
-  static const Color red = Color.fromARGB(255, 188, 80, 67);
+  static const Color red = Color.fromARGB(255, 195, 70, 61);
   static const Color lightBlue = Color.fromRGBO(119, 180, 190, 1);
   static const Color semiBlue = Color.fromRGBO(140, 167, 201, 1);
   static const Color darkBlue = Color.fromRGBO(62, 84, 124, 1);
 
+  static const spacing = 12.0;
   static const mainRadius = BorderRadius.all(Radius.circular(8.0));
   static const pagePadding = EdgeInsets.all(20.0);
-  static const contentPadding = EdgeInsets.all(12.0);
+  static const contentPadding = EdgeInsets.all(spacing);
+  static const splashDuration = Duration(seconds: 2);
 
-  static final lightTheme = ThemeData(
+  static final light = ThemeData(
     scaffoldBackgroundColor: greyishBlue,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: darkBlue,
       foregroundColor: white,
       elevation: 0.0,
@@ -59,7 +61,7 @@ class CustomTheme {
     iconTheme: const IconThemeData(
       color: darkBlue,
     ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
       foregroundColor: darkBlue,
       iconSize: 48.0,
     ),
@@ -69,10 +71,10 @@ class CustomTheme {
     color: Colors.black.withAlpha(50),
     spreadRadius: .5,
     blurRadius: 1,
-    offset: Offset(0, 1),
+    offset: const Offset(0, 1),
   );
 
-  static LinearGradient pageGradient = LinearGradient(
+  static LinearGradient pageGradient = const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [

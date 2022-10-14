@@ -29,7 +29,7 @@ class ProductItem extends StatelessWidget {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     '11.10.22',
                     style: TextStyle(
@@ -48,7 +48,7 @@ class ProductItem extends StatelessWidget {
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: CustomTheme.grey,
                 size: 12.0,
