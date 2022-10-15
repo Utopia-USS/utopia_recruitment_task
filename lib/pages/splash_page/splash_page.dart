@@ -42,10 +42,8 @@ class SplashPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                CircularProgressIndicator(
-                  color: CustomTheme.lightBlue,
-                ),
-                SizedBox(height: 36.0),
+                CircularProgressIndicator(),
+                SizedBox(height: CustomTheme.bigSpacing),
                 Text(
                   'Welcome to Utopia',
                   style: TextStyle(

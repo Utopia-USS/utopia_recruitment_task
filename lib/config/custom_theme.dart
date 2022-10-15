@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class CustomTheme {
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
-  static const Color greyishBlue = Color.fromRGBO(241, 245, 248, 1);
   static const Color semiGray = Color.fromRGBO(200, 199, 204, 1);
   static const Color grey = Colors.grey;
   static const Color darkGray = Color.fromRGBO(114, 114, 119, 1);
@@ -14,13 +13,18 @@ class CustomTheme {
   static const Color darkBlue = Color.fromRGBO(62, 84, 124, 1);
 
   static const spacing = 12.0;
+  static const bigSpacing = spacing * 3;
   static const mainRadius = BorderRadius.all(Radius.circular(8.0));
   static const pagePadding = EdgeInsets.all(20.0);
   static const contentPadding = EdgeInsets.all(spacing);
   static const splashDuration = Duration(seconds: 2);
 
   static final light = ThemeData(
-    scaffoldBackgroundColor: greyishBlue,
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      primary: lightBlue,
+      secondary: darkBlue,
+    ),
+    scaffoldBackgroundColor: darkBlue,
     appBarTheme: const AppBarTheme(
       backgroundColor: darkBlue,
       foregroundColor: white,
@@ -62,8 +66,11 @@ class CustomTheme {
       color: darkBlue,
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      foregroundColor: darkBlue,
+      foregroundColor: lightBlue,
       iconSize: 48.0,
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: lightBlue,
     ),
   );
 

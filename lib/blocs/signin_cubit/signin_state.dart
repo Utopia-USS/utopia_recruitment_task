@@ -13,14 +13,6 @@ class SignInState extends Equatable {
     this.errorMessage,
   });
 
-  @override
-  List<Object?> get props => [
-        email,
-        password,
-        status,
-        errorMessage,
-      ];
-
   SignInState copyWith({
     Email? email,
     Password? password,
@@ -34,4 +26,12 @@ class SignInState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        email,
+        password,
+        status,
+        errorMessage,
+      ];
 }

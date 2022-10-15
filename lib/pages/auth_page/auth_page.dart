@@ -30,6 +30,11 @@ class AautPpageState extends State<AuthPage> {
   void initState() {
     super.initState();
     _signInCubit = SignInCubit(context.read<AuthService>());
+
+    _emailController.text = "test@test.ee";
+    _passwordController.text = "validPassword123X";
+    _signInCubit.emailChanged("test@test.ee");
+    _signInCubit.passwordChanged("validPassword123X");
   }
 
   @override
@@ -48,7 +53,7 @@ class AautPpageState extends State<AuthPage> {
               _buildEmailInput(),
               const SizedBox(height: CustomTheme.spacing),
               _buildPasswordInput(),
-              const SizedBox(height: CustomTheme.spacing * 3),
+              const SizedBox(height: CustomTheme.bigSpacing),
               _buildLoginButton(),
             ],
           ),
