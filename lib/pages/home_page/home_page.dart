@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: CustomTheme.white,
         child: const Icon(Icons.add_rounded),
-        onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const NewItem())),
+        onPressed: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const NewItemPage())),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

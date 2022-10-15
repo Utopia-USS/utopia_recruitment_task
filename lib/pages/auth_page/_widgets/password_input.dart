@@ -35,7 +35,6 @@ class _PasswordInputState extends State<PasswordInput> {
           decoration: InputDecoration(
             labelText: widget.labelText ?? 'Password',
             errorText: widget.errorText,
-            floatingLabelBehavior: FloatingLabelBehavior.never,
             suffixIcon: GestureDetector(
               child: Container(
                 width: 50.0,

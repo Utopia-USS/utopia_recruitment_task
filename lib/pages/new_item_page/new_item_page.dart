@@ -9,14 +9,14 @@ import 'package:utopia_recruitment_task/pages/_widgets/custom_messenger.dart';
 import 'package:utopia_recruitment_task/service/firebase_item_service.dart';
 import 'package:formz/formz.dart';
 
-class NewItem extends StatefulWidget {
-  const NewItem({super.key});
+class NewItemPage extends StatefulWidget {
+  const NewItemPage({super.key});
 
   @override
-  State<NewItem> createState() => _NewItemState();
+  State<NewItemPage> createState() => _NewItemState();
 }
 
-class _NewItemState extends State<NewItem> {
+class _NewItemState extends State<NewItemPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _urlController = TextEditingController();
@@ -25,7 +25,12 @@ class _NewItemState extends State<NewItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('New Item')),
+      appBar: AppBar(
+        title: const Text(
+          'NEW',
+          style: TextStyle(letterSpacing: 20.0),
+        ),
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
