@@ -23,7 +23,6 @@ class EmailInput extends StatelessWidget {
       decoration: InputDecoration(
         labelText: 'Email',
         errorText: errorText,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
       ),
       onChanged: (val) => onChanged(val),
       onEditingComplete: () =>

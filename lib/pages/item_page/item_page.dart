@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:utopia_recruitment_task/config/custom_theme.dart';
+import 'package:utopia_recruitment_task/helpers/datetime_helper.dart';
+import 'package:utopia_recruitment_task/models/item_model.dart';
+import 'package:utopia_recruitment_task/pages/_widgets/buttons/primary_button.dart';
 
 class ItemPage extends StatelessWidget {
-  const ItemPage({super.key});
+  final Item item;
+
+  const ItemPage({super.key, required this.item});
+
+  Page<void> page() => MaterialPage<void>(child: ItemPage(item: item));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Name'),
-      ),
+          // title: Text(item.name),
+          ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -27,12 +34,34 @@ class ItemPage extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('21.09.2022'),
-                SizedBox(height: 8.0),
+              children: [
                 Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                  DateTimeHelper.fullDate(item.created),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    height: 1,
+                    fontWeight: FontWeight.w500,
+                    color: CustomTheme.grey,
+                  ),
                 ),
+                const SizedBox(height: CustomTheme.spacing),
+                Text(
+                  item.name,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                if (item.note != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: CustomTheme.spacing),
+                    child: Text(item.note!),
+                  ),
+                if (item.url != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: CustomTheme.spacing),
+                    child: PrimaryButton(title: 'Open link', action: () {}),
+                  ),
               ],
             ),
           ),

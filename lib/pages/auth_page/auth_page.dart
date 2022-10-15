@@ -35,22 +35,37 @@ class AautPpageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login page')),
-      body: Container(
+      appBar: AppBar(
+        title: const Text(
+          'LOGIN',
+          style: TextStyle(letterSpacing: 20.0),
+        ),
+      ),
+      body: DecoratedBox(
         decoration: BoxDecoration(
           gradient: CustomTheme.pageGradient,
         ),
         child: Padding(
           padding: CustomTheme.contentPadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildEmailInput(),
-              const SizedBox(height: CustomTheme.spacing),
-              _buildPasswordInput(),
-              const SizedBox(height: CustomTheme.spacing * 3),
-              _buildLoginButton(),
-            ],
+          child: Center(
+            child: Container(
+              padding: CustomTheme.contentPadding,
+              decoration: const BoxDecoration(
+                color: CustomTheme.white,
+                borderRadius: CustomTheme.mainRadius,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildEmailInput(),
+                  const SizedBox(height: CustomTheme.spacing),
+                  _buildPasswordInput(),
+                  const SizedBox(height: CustomTheme.spacing),
+                  _buildLoginButton(),
+                ],
+              ),
+            ),
           ),
         ),
       ),

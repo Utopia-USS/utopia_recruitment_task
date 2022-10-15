@@ -9,8 +9,8 @@ class CustomMessager {
     duration = const Duration(seconds: 5),
   }) {
     Flushbar(
-      margin: const EdgeInsets.all(8),
-      borderRadius: BorderRadius.circular(8),
+      margin: CustomTheme.pagePadding,
+      borderRadius: CustomTheme.mainRadius,
       flushbarPosition: FlushbarPosition.TOP,
       backgroundColor: CustomTheme.red,
       message: message,

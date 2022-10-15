@@ -16,6 +16,7 @@ dependencies:
   equatable: ^2.0.5
   font_awesome_flutter: ^10.2.1
   another_flushbar: ^1.12.29
+  intl: ^0.17.0
   mocktail: ^0.3.0
   bloc_test: ^9.1.0
 
