@@ -37,55 +37,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('UTOPIA'),
-        actions: <Widget>[
-          BlocListener<AppBloc, AppState>(
-            listener: (context, state) {
-              if (state.user.isEmpty) {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const AuthPage()),
-                    (Route<dynamic> route) => false);
-              }
-            },
-            child: CupertinoButton(
-              key: const Key('homePage_logout_iconButton'),
-              child: const Icon(
-                Icons.exit_to_app_rounded,
-                color: CustomTheme.semiBlue,
-              ),
-              onPressed: () =>
-                  context.read<AppBloc>().add(AppLogoutRequested()),
-            ),
-          )
-        ],
-      ),
-      body: Container(
-        padding: CustomTheme.contentPadding,
-        decoration: BoxDecoration(
-          gradient: CustomTheme.pageGradient,
-        ),
-        child: SafeArea(
-          child: BlocBuilder<ItemsBloc, ItemsState>(
-            bloc: _itemsBloc,
-            builder: (context, state) {
-              if (state is LoadingItemsState) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is CompleteItemsState) {
-                return RefreshIndicator(
-                  child: (state.items.isEmpty)
-                      ? _buildEmpty()
-                      : _buildListView(state.items),
-                  onRefresh: () async => _itemsBloc.add(GetItemsEvent(_user)),
-                );
-              } else if (state is ErrorItemsState) {
-                return _buildError();
-              }
-              return const SizedBox();
-            },
-          ),
-        ),
-      ),
+      appBar: _buildAppBar(),
+      body: _buildContent(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: CustomTheme.white,
         child: const Icon(Icons.add_rounded),
@@ -93,6 +46,62 @@ class _HomePageState extends State<HomePage> {
             context, MaterialPageRoute(builder: (context) => const NewItem())),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: const Text(
+        'UTOPIA',
+        style: TextStyle(letterSpacing: 20.0),
+      ),
+      actions: <Widget>[
+        BlocListener<AppBloc, AppState>(
+          listener: (context, state) {
+            if (state.user.isEmpty) {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const AuthPage()),
+                  (Route<dynamic> route) => false);
+            }
+          },
+          child: CupertinoButton(
+            key: const Key('homePage_logout_iconButton'),
+            child: const Icon(
+              Icons.exit_to_app_rounded,
+              color: CustomTheme.semiBlue,
+            ),
+            onPressed: () => context.read<AppBloc>().add(AppLogoutRequested()),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildContent() {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: CustomTheme.pageGradient,
+      ),
+      child: SafeArea(
+        child: BlocBuilder<ItemsBloc, ItemsState>(
+          bloc: _itemsBloc,
+          builder: (context, state) {
+            if (state is LoadingItemsState) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is CompleteItemsState) {
+              return RefreshIndicator(
+                child: (state.items.isEmpty)
+                    ? _buildEmpty()
+                    : _buildListView(state.items),
+                onRefresh: () async => _itemsBloc.add(GetItemsEvent(_user)),
+              );
+            } else if (state is ErrorItemsState) {
+              return _buildError();
+            }
+            return const SizedBox();
+          },
+        ),
+      ),
     );
   }
 

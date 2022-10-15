@@ -41,7 +41,7 @@ class AautPpageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Login page')),
-      body: Container(
+      body: DecoratedBox(
         decoration: BoxDecoration(
           gradient: CustomTheme.pageGradient,
         ),
