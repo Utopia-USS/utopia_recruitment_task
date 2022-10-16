@@ -11,7 +11,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AppBloc, AppState>(
-      listener: (context, state) async {
+      listener: (_, state) async {
         if (state.status == AppStatus.authenticated) {
           await Future.delayed(CustomTheme.splashDuration).then(
             (_) => Navigator.pushReplacement(

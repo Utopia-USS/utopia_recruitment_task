@@ -49,7 +49,7 @@ class SignInCubit extends Cubit<SignInState> {
           errorMessage: e.message,
         ));
       }
-    } catch (e) {
+    } catch (_) {
       emit(state.copyWith(
         status: FormzStatus.submissionFailure,
         errorMessage: 'Something went wrong',
@@ -71,7 +71,7 @@ class SignInCubit extends Cubit<SignInState> {
         status: FormzStatus.submissionFailure,
         errorMessage: e.message,
       ));
-    } catch (e) {
+    } catch (_) {
       emit(state.copyWith(
         status: FormzStatus.submissionFailure,
         errorMessage: 'Something went wrong',

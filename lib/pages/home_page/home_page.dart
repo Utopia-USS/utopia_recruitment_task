@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: <Widget>[
         BlocListener<AppBloc, AppState>(
-          listener: (context, state) {
+          listener: (_, state) {
             if (state.user.isEmpty) {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => const AuthPage()),
@@ -87,14 +87,9 @@ class _HomePageState extends State<HomePage> {
         gradient: CustomTheme.pageGradient,
       ),
       child: SafeArea(
-        child: BlocConsumer<ItemsBloc, ItemsState>(
+        child: BlocBuilder<ItemsBloc, ItemsState>(
           bloc: _itemsBloc,
-          listener: (_, state) {
-            // if (state is CompleteItemsState) {
-            //   () => _scrollUp();
-            // }
-          },
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is LoadingItemsState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is CompleteItemsState) {
