@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:utopia_recruitment_task/blocs/app_bloc/app_bloc.dart';
 import 'package:utopia_recruitment_task/blocs/items_bloc/items_bloc.dart';
 import 'package:utopia_recruitment_task/config/custom_theme.dart';
@@ -131,18 +130,21 @@ class _HomePageState extends State<HomePage> {
     return ListView(
       padding: CustomTheme.contentPadding,
       children: [
-        ...items.map(
-          (item) => Padding(
+        ...items.asMap().entries.map((entry) {
+          final item = entry.value;
+          return Padding(
             padding: const EdgeInsets.only(bottom: CustomTheme.spacing),
-            child: ProductItem(
+            child: ListItem(
+              index: entry.key,
               item: item,
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ItemPage(item: item)),
               ),
             ),
-          ),
-        ),
+          );
+        }),
+        const SizedBox(height: 75.0),
       ],
     );
   }
