@@ -26,9 +26,9 @@ class _NewItemState extends State<NewItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'NEW',
-          style: TextStyle(letterSpacing: 20.0),
+          style: CustomTheme.appBarTitle,
         ),
       ),
       body: Container(
@@ -65,7 +65,7 @@ class _NewItemState extends State<NewItemPage> {
   Widget _buildNameInput() {
     return BlocBuilder<NewItemCubit, NewItemState>(
       bloc: _newItemCubit,
-      builder: (context, state) {
+      builder: (_, state) {
         return TextFormField(
           controller: _nameController,
           keyboardType: TextInputType.emailAddress,
@@ -96,13 +96,19 @@ class _NewItemState extends State<NewItemPage> {
   }
 
   Widget _buildURLInput() {
-    return TextFormField(
-      controller: _urlController,
-      keyboardType: TextInputType.emailAddress,
-      decoration: const InputDecoration(
-        labelText: 'Url',
-      ),
-      onChanged: (value) => _newItemCubit.urlChanged(value),
+    return BlocBuilder<NewItemCubit, NewItemState>(
+      bloc: _newItemCubit,
+      builder: (_, state) {
+        return TextFormField(
+          controller: _urlController,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            labelText: 'Url',
+            errorText: state.url.invalid ? 'Please enter correct url' : null,
+          ),
+          onChanged: (website) => _newItemCubit.urlChanged(website),
+        );
+      },
     );
   }
 
@@ -119,7 +125,7 @@ class _NewItemState extends State<NewItemPage> {
           );
         }
       },
-      builder: (context, state) {
+      builder: (_, state) {
         if (state.status == FormzStatus.submissionInProgress ||
             state.status == FormzStatus.submissionSuccess) {
           return const PrimaryLoadingButton();

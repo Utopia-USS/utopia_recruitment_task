@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:utopia_recruitment_task/models/email_model.dart';
-import 'package:utopia_recruitment_task/models/password_model.dart';
+import 'package:utopia_recruitment_task/helpers/formz/email_input.dart';
+import 'package:utopia_recruitment_task/helpers/formz/password_input.dart';
 import 'package:utopia_recruitment_task/service/auth_service.dart';
 
 part 'signin_state.dart';

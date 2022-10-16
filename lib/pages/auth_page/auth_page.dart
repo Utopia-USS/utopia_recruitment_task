@@ -14,8 +14,6 @@ import 'package:utopia_recruitment_task/service/auth_service.dart';
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
 
-  static Page<void> page() => const MaterialPage<void>(child: AuthPage());
-
   @override
   State<AuthPage> createState() => AautPpageState();
 }
@@ -36,9 +34,9 @@ class AautPpageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'LOGIN',
-          style: TextStyle(letterSpacing: 20.0),
+          style: CustomTheme.appBarTitle,
         ),
       ),
       body: DecoratedBox(

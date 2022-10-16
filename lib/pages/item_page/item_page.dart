@@ -3,20 +3,17 @@ import 'package:utopia_recruitment_task/config/custom_theme.dart';
 import 'package:utopia_recruitment_task/helpers/datetime_helper.dart';
 import 'package:utopia_recruitment_task/models/item_model.dart';
 import 'package:utopia_recruitment_task/pages/_widgets/buttons/primary_button.dart';
+import 'package:utopia_recruitment_task/pages/item_page/webview_page.dart';
 
 class ItemPage extends StatelessWidget {
   final Item item;
 
   const ItemPage({super.key, required this.item});
 
-  Page<void> page() => MaterialPage<void>(child: ItemPage(item: item));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          // title: Text(item.name),
-          ),
+      appBar: AppBar(),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -60,7 +57,14 @@ class ItemPage extends StatelessWidget {
                 if (item.url != null)
                   Padding(
                     padding: const EdgeInsets.only(top: CustomTheme.spacing),
-                    child: PrimaryButton(title: 'Open link', action: () {}),
+                    child: PrimaryButton(
+                      title: 'Open link',
+                      action: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WebviewPage(url: item.url!)),
+                      ),
+                    ),
                   ),
               ],
             ),
