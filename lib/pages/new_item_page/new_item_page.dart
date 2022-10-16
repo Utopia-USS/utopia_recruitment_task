@@ -131,7 +131,7 @@ class _NewItemState extends State<NewItemPage> {
           return const PrimaryLoadingButton();
         } else {
           return PrimaryButton(
-            title: 'Add new item',
+            title: 'Add new',
             active: !state.status.isPure && !state.status.isInvalid,
             action: () {
               final user = (BlocProvider.of<AppBloc>(context).state).user;
