@@ -2,7 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:utopia_recruitment_task/models/item_model.dart';
-import 'package:utopia_recruitment_task/models/name_model.dart';
+import 'package:utopia_recruitment_task/helpers/formz/url_input.dart';
+import 'package:utopia_recruitment_task/helpers/formz/name_input.dart';
 import 'package:utopia_recruitment_task/service/firebase_item_service.dart';
 
 part 'new_item_state.dart';
@@ -14,39 +15,44 @@ class NewItemCubit extends Cubit<NewItemState> {
 
   void nameChanged(String value) {
     final name = Name.dirty(value);
+
     emit(state.copyWith(
       name: name,
-      status: Formz.validate([name]),
+      status: Formz.validate([
+        name,
+        state.url,
+      ]),
     ));
   }
 
   void noteChanged(String value) {
     emit(state.copyWith(
       note: value,
-      status: Formz.validate([state.name]),
+      status: Formz.validate([state.name, state.url]),
     ));
   }
 
   void urlChanged(String value) {
+    final link = URL.dirty(value);
     emit(state.copyWith(
-      url: value,
-      status: Formz.validate([state.name]),
+      url: link,
+      status: Formz.validate([state.name, link]),
     ));
   }
 
   Future<void> addItem(String uid) async {
+    if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
-      emit(state.copyWith(status: FormzStatus.submissionFailure));
       final item = Item(
         DateTime.now(),
         state.name.value,
         state.note,
-        state.url,
+        state.url.value,
       );
       await _itemService.saveItem(uid, item);
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
-    } catch (e) {
+    } catch (_) {
       emit(state.copyWith(status: FormzStatus.submissionFailure));
     }
   }

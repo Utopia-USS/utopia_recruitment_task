@@ -89,4 +89,6 @@ class CustomTheme {
       semiBlue,
     ],
   );
+
+  static TextStyle appBarTitle = const TextStyle(letterSpacing: 20.0);
 }

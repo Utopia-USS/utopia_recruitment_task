@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:utopia_recruitment_task/blocs/app_bloc/app_bloc.dart';
 import 'package:utopia_recruitment_task/blocs/items_bloc/items_bloc.dart';
 import 'package:utopia_recruitment_task/config/custom_theme.dart';
@@ -16,8 +17,6 @@ import '_widgets/list_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
-  static Page<void> page() => const MaterialPage<void>(child: HomePage());
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -51,9 +50,9 @@ class _HomePageState extends State<HomePage> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: const Text(
+      title: Text(
         'UTOPIA',
-        style: TextStyle(letterSpacing: 20.0),
+        style: CustomTheme.appBarTitle,
       ),
       actions: <Widget>[
         BlocListener<AppBloc, AppState>(
