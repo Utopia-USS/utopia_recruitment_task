@@ -23,8 +23,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ScrollController _controller = ScrollController();
+
   late FirebaseUser _user;
   late ItemsBloc _itemsBloc;
+
+  void _scrollUp() {
+    _controller.animateTo(
+      _controller.position.minScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 
   @override
   void initState() {
@@ -38,12 +48,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildContent(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: CustomTheme.white,
-        child: const Icon(Icons.add_rounded),
-        onPressed: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const NewItemPage())),
-      ),
+      floatingActionButton: _buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
@@ -82,8 +87,13 @@ class _HomePageState extends State<HomePage> {
         gradient: CustomTheme.pageGradient,
       ),
       child: SafeArea(
-        child: BlocBuilder<ItemsBloc, ItemsState>(
+        child: BlocConsumer<ItemsBloc, ItemsState>(
           bloc: _itemsBloc,
+          listener: (_, state) {
+            // if (state is CompleteItemsState) {
+            //   () => _scrollUp();
+            // }
+          },
           builder: (context, state) {
             if (state is LoadingItemsState) {
               return const Center(child: CircularProgressIndicator());
@@ -101,6 +111,22 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
+    );
+  }
+
+  FloatingActionButton _buildFloatingActionButton() {
+    return FloatingActionButton(
+      backgroundColor: CustomTheme.white,
+      child: const Icon(Icons.add_rounded),
+      onPressed: () async {
+        var result = await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const NewItemPage()),
+        );
+        if (result != null) {
+          _scrollUp();
+        }
+      },
     );
   }
 
@@ -128,6 +154,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildListView(List<Item> items) {
     return ListView(
+      controller: _controller,
       padding: CustomTheme.contentPadding,
       children: [
         ...items.asMap().entries.map((entry) {
@@ -135,13 +162,15 @@ class _HomePageState extends State<HomePage> {
           return Padding(
             padding: const EdgeInsets.only(bottom: CustomTheme.spacing),
             child: ListItem(
-              index: entry.key,
-              item: item,
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ItemPage(item: item)),
-              ),
-            ),
+                index: entry.key,
+                item: item,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ItemPage(item: item)),
+                  );
+                }),
           );
         }),
         const SizedBox(height: 75.0),

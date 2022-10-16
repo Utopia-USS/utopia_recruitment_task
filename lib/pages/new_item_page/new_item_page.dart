@@ -117,7 +117,7 @@ class _NewItemState extends State<NewItemPage> {
       bloc: _newItemCubit,
       listener: (_, state) {
         if (state.status == FormzStatus.submissionSuccess) {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(true);
         } else if (state.status == FormzStatus.submissionFailure) {
           CustomMessager().showError(
             context: context,

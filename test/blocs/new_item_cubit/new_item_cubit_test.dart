@@ -22,16 +22,16 @@ void main() {
   const uid = 'uid';
   final now = DateTime.now();
 
-  final milliseconds = now.toUtc().millisecondsSinceEpoch;
-  final createdWithoutMicroseconds = DateTime(
-    now.year,
-    now.month,
-    now.day,
-    now.hour,
-    now.minute,
-    now.second,
-    now.millisecond,
-  );
+  // final milliseconds = now.toUtc().millisecondsSinceEpoch;
+  // final createdWithoutMicroseconds = DateTime(
+  //   now.year,
+  //   now.month,
+  //   now.day,
+  //   now.hour,
+  //   now.minute,
+  //   now.second,
+  //   now.millisecond,
+  // );
 
   final item = Item(
     now,
