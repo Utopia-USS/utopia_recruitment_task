@@ -24,8 +24,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   ) async {
     try {
       emit(LoadingItemsState());
-      await Future.delayed(const Duration(seconds: 2));
-
+      await Future.delayed(const Duration(seconds: 1));
       if (event.user.isNotEmpty) {
         _subscription =
             _itemService.createItemStream(event.user.id).listen((lists) {

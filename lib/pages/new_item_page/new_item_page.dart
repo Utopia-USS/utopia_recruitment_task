@@ -68,7 +68,7 @@ class _NewItemState extends State<NewItemPage> {
       builder: (_, state) {
         return TextFormField(
           controller: _nameController,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           decoration: InputDecoration(
             labelText: 'Name',
             errorText: state.name.invalid ? 'Please enter name' : null,
@@ -101,7 +101,7 @@ class _NewItemState extends State<NewItemPage> {
       builder: (_, state) {
         return TextFormField(
           controller: _urlController,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.url,
           decoration: InputDecoration(
             labelText: 'Url',
             errorText: state.url.invalid ? 'Please enter correct url' : null,
