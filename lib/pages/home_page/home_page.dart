@@ -9,6 +9,7 @@ import 'package:utopia_recruitment_task/models/firebase_user_model.dart';
 import 'package:utopia_recruitment_task/models/item_model.dart';
 import 'package:utopia_recruitment_task/pages/_widgets/buttons/primary_button.dart';
 import 'package:utopia_recruitment_task/pages/auth_page/auth_page.dart';
+import 'package:utopia_recruitment_task/pages/home_page/_widgets/arrow_indicator.dart';
 import 'package:utopia_recruitment_task/pages/item_page/item_page.dart';
 import 'package:utopia_recruitment_task/pages/new_item_page/new_item_page.dart';
 import 'package:utopia_recruitment_task/service/firebase_item_service.dart';
@@ -105,22 +106,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildEmpty() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(
-          'Your list is empty, press button bellow to add new items into the list.',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: CustomTheme.white,
+    return Padding(
+      padding: CustomTheme.contentPadding * 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text(
+            'Your list is empty, press button bellow to add new items into the list.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: CustomTheme.white,
+              fontSize: 16.0,
+              height: 1.5,
+            ),
           ),
-        ),
-        SizedBox(height: CustomTheme.spacing),
-        Icon(
-          Icons.arrow_downward_sharp,
-          color: CustomTheme.white,
-        )
-      ],
+          SizedBox(height: CustomTheme.spacing),
+          ArrowIndicator(),
+        ],
+      ),
     );
   }
 
