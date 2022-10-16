@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:utopia_recruitment_task/models/password_model.dart';
+import 'package:utopia_recruitment_task/helpers/formz/password_input.dart';
 
 void main() {
   const validPasswordString = 'mockPassword123!';

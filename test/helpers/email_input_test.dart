@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter_test/flutter_test.dart';
-import 'package:utopia_recruitment_task/models/email_model.dart';
+import 'package:utopia_recruitment_task/helpers/formz/email_input.dart';
 
 void main() {
   const validEmailString = 'email@gmail.com';
