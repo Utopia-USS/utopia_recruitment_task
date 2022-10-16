@@ -48,9 +48,9 @@ class SplashPage extends StatelessWidget {
                   'WELCOME',
                   style: TextStyle(
                     color: CustomTheme.white,
-                    fontSize: 30.0,
+                    fontSize: 22.0,
                     fontWeight: FontWeight.w500,
-                    letterSpacing: 10.0,
+                    letterSpacing: 20.0,
                   ),
                 ),
               ],
