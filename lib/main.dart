@@ -33,7 +33,7 @@ class UtopiaApp extends StatelessWidget {
       value: _authService,
       child: BlocProvider(
         create: (_) => AppBloc(
-          authenticationRepository: _authService,
+          authService: _authService,
         ),
         child: const AppView(),
       ),
