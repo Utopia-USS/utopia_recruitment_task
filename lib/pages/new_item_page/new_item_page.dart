@@ -6,6 +6,7 @@ import 'package:utopia_recruitment_task/config/custom_theme.dart';
 import 'package:utopia_recruitment_task/pages/_widgets/buttons/primary_button.dart';
 import 'package:utopia_recruitment_task/pages/_widgets/buttons/primary_loading_button.dart';
 import 'package:utopia_recruitment_task/pages/_widgets/custom_messenger.dart';
+import 'package:utopia_recruitment_task/service/datetime_service.dart';
 import 'package:utopia_recruitment_task/service/firebase_item_service.dart';
 import 'package:formz/formz.dart';
 
@@ -20,7 +21,10 @@ class _NewItemState extends State<NewItemPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _urlController = TextEditingController();
-  final NewItemCubit _newItemCubit = NewItemCubit(FirebaseItemService());
+  final NewItemCubit _newItemCubit = NewItemCubit(
+    FirebaseItemService(),
+    DateTimeService(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +139,7 @@ class _NewItemState extends State<NewItemPage> {
             active: !state.status.isPure && !state.status.isInvalid,
             action: () {
               final user = (BlocProvider.of<AppBloc>(context).state).user;
-              _newItemCubit.addItem(user.id, DateTime.now());
+              _newItemCubit.addItem(user.id);
             },
           );
         }

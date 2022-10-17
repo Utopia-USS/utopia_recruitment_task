@@ -4,14 +4,19 @@ import 'package:formz/formz.dart';
 import 'package:utopia_recruitment_task/models/item_model.dart';
 import 'package:utopia_recruitment_task/helpers/formz/url_input.dart';
 import 'package:utopia_recruitment_task/helpers/formz/name_input.dart';
+import 'package:utopia_recruitment_task/service/datetime_service.dart';
 import 'package:utopia_recruitment_task/service/firebase_item_service.dart';
 
 part 'new_item_state.dart';
 
 class NewItemCubit extends Cubit<NewItemState> {
   final FirebaseItemService _itemService;
+  final DateTimeService _datetimeService;
 
-  NewItemCubit(this._itemService) : super(const NewItemState());
+  NewItemCubit(
+    this._itemService,
+    this._datetimeService,
+  ) : super(const NewItemState());
 
   void nameChanged(String value) {
     final name = Name.dirty(value);
@@ -40,13 +45,12 @@ class NewItemCubit extends Cubit<NewItemState> {
     ));
   }
 
-  Future<void> addItem(String uid, DateTime now) async {
+  Future<void> addItem(String uid) async {
     if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       final item = Item(
-        // DateTime.now(),
-        now,
+        _datetimeService.now(),
         state.name.value,
         state.note,
         state.url.value,
