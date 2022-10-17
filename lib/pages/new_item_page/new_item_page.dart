@@ -68,7 +68,7 @@ class _NewItemState extends State<NewItemPage> {
       builder: (_, state) {
         return TextFormField(
           controller: _nameController,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           decoration: InputDecoration(
             labelText: 'Name',
             errorText: state.name.invalid ? 'Please enter name' : null,
@@ -101,7 +101,7 @@ class _NewItemState extends State<NewItemPage> {
       builder: (_, state) {
         return TextFormField(
           controller: _urlController,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.url,
           decoration: InputDecoration(
             labelText: 'Url',
             errorText: state.url.invalid ? 'Please enter correct url' : null,
@@ -117,7 +117,7 @@ class _NewItemState extends State<NewItemPage> {
       bloc: _newItemCubit,
       listener: (_, state) {
         if (state.status == FormzStatus.submissionSuccess) {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(true);
         } else if (state.status == FormzStatus.submissionFailure) {
           CustomMessager().showError(
             context: context,
@@ -131,11 +131,11 @@ class _NewItemState extends State<NewItemPage> {
           return const PrimaryLoadingButton();
         } else {
           return PrimaryButton(
-            title: 'Add new item',
+            title: 'Add new',
             active: !state.status.isPure && !state.status.isInvalid,
             action: () {
               final user = (BlocProvider.of<AppBloc>(context).state).user;
-              _newItemCubit.addItem(user.id);
+              _newItemCubit.addItem(user.id, DateTime.now());
             },
           );
         }

@@ -11,7 +11,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AppBloc, AppState>(
-      listener: (context, state) async {
+      listener: (_, state) async {
         if (state.status == AppStatus.authenticated) {
           await Future.delayed(CustomTheme.splashDuration).then(
             (_) => Navigator.pushReplacement(
@@ -43,13 +43,14 @@ class SplashPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 CircularProgressIndicator(),
-                SizedBox(height: CustomTheme.bigSpacing),
+                SizedBox(height: CustomTheme.bigSpacing * 2),
                 Text(
-                  'Welcome to Utopia',
+                  'WELCOME',
                   style: TextStyle(
                     color: CustomTheme.white,
-                    fontSize: 36.0,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 20.0,
                   ),
                 ),
               ],

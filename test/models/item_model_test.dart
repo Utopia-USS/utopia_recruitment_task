@@ -71,21 +71,57 @@ void main() {
       );
     });
 
-    test('convert to json', () async {
-      expect(
-        Item(
-          created,
-          'name',
-          'note',
-          'url',
-        ).toJson(),
-        {
-          'created': milliseconds,
-          'name': 'name',
-          'note': 'note',
-          'url': 'url',
-        },
-      );
+    group('convert to json', () {
+      test('all fields', () async {
+        expect(
+          Item(
+            created,
+            'name',
+            'note',
+            'url',
+          ).toJson(),
+          {
+            'created': milliseconds,
+            'name': 'name',
+            'note': 'note',
+            'url': 'url',
+          },
+        );
+      });
+
+      test('note and note are empty', () async {
+        expect(
+          Item(
+            created,
+            'name',
+            '',
+            '',
+          ).toJson(),
+          {
+            'created': milliseconds,
+            'name': 'name',
+            'note': null,
+            'url': null,
+          },
+        );
+      });
+
+      test('note and note are null', () async {
+        expect(
+          Item(
+            created,
+            'name',
+            null,
+            null,
+          ).toJson(),
+          {
+            'created': milliseconds,
+            'name': 'name',
+            'note': null,
+            'url': null,
+          },
+        );
+      });
     });
   });
 }

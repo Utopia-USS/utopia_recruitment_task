@@ -8,6 +8,7 @@ import 'package:utopia_recruitment_task/pages/_widgets/buttons/primary_loading_b
 import 'package:utopia_recruitment_task/pages/_widgets/custom_messenger.dart';
 import 'package:utopia_recruitment_task/pages/auth_page/_widgets/email_input.dart';
 import 'package:utopia_recruitment_task/pages/auth_page/_widgets/password_input.dart';
+import 'package:utopia_recruitment_task/pages/auth_page/_widgets/password_tips.dart';
 import 'package:utopia_recruitment_task/pages/home_page/home_page.dart';
 import 'package:utopia_recruitment_task/service/auth_service.dart';
 
@@ -39,29 +40,34 @@ class AautPpageState extends State<AuthPage> {
           style: CustomTheme.appBarTitle,
         ),
       ),
-      body: DecoratedBox(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           gradient: CustomTheme.pageGradient,
         ),
-        child: Padding(
-          padding: CustomTheme.contentPadding,
-          child: Center(
-            child: Container(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
               padding: CustomTheme.contentPadding,
-              decoration: const BoxDecoration(
-                color: CustomTheme.white,
-                borderRadius: CustomTheme.mainRadius,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildEmailInput(),
-                  const SizedBox(height: CustomTheme.spacing),
-                  _buildPasswordInput(),
-                  const SizedBox(height: CustomTheme.spacing),
-                  _buildLoginButton(),
-                ],
+              child: Container(
+                padding: CustomTheme.contentPadding,
+                decoration: const BoxDecoration(
+                  color: CustomTheme.white,
+                  borderRadius: CustomTheme.mainRadius,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildEmailInput(),
+                    const SizedBox(height: CustomTheme.spacing),
+                    _buildPasswordInput(),
+                    const SizedBox(height: CustomTheme.spacing),
+                    _buildPasswordTips(),
+                    _buildLoginButton(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -94,6 +100,22 @@ class AautPpageState extends State<AuthPage> {
           onChanged: (password) => _signInCubit.passwordChanged(password),
           errorText: state.password.invalid ? 'Invalid password' : null,
         );
+      },
+    );
+  }
+
+  Widget _buildPasswordTips() {
+    return BlocBuilder<SignInCubit, SignInState>(
+      bloc: _signInCubit,
+      builder: (_, state) {
+        if (state.password.status == FormzInputStatus.invalid) {
+          return const Padding(
+            padding: EdgeInsets.only(bottom: CustomTheme.spacing),
+            child: PasswordTips(),
+          );
+        } else {
+          return Container();
+        }
       },
     );
   }

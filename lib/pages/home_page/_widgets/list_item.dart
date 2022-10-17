@@ -3,12 +3,14 @@ import 'package:utopia_recruitment_task/config/custom_theme.dart';
 import 'package:utopia_recruitment_task/helpers/datetime_helper.dart';
 import 'package:utopia_recruitment_task/models/item_model.dart';
 
-class ProductItem extends StatelessWidget {
+class ListItem extends StatelessWidget {
+  final int index;
   final Item item;
   final Function onTap;
 
-  const ProductItem({
+  const ListItem({
     super.key,
+    required this.index,
     required this.item,
     required this.onTap,
   });
@@ -29,11 +31,33 @@ class ProductItem extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                padding: CustomTheme.contentPadding,
+                padding: const EdgeInsets.fromLTRB(
+                  0,
+                  CustomTheme.spacing,
+                  CustomTheme.spacing,
+                  CustomTheme.spacing,
+                ),
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Container(
+                      padding: const EdgeInsets.all(4.0),
+                      decoration: const BoxDecoration(
+                        color: CustomTheme.semiBlue,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(6.0),
+                          bottomRight: Radius.circular(6.0),
+                        ),
+                      ),
+                      child: Text(
+                        "${index + 1}",
+                        style: const TextStyle(
+                          color: CustomTheme.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: CustomTheme.spacing / 3),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

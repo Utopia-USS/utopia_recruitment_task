@@ -27,8 +27,8 @@ class Item extends Equatable {
     return {
       'created': created.toUtc().millisecondsSinceEpoch,
       'name': name,
-      'note': note,
-      'url': url,
+      'note': (note == null || note!.isEmpty) ? null : note,
+      'url': (url == null || url!.isEmpty) ? null : url,
     };
   }
 

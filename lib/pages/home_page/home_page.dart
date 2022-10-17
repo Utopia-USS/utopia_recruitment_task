@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:utopia_recruitment_task/blocs/app_bloc/app_bloc.dart';
 import 'package:utopia_recruitment_task/blocs/items_bloc/items_bloc.dart';
 import 'package:utopia_recruitment_task/config/custom_theme.dart';
@@ -9,6 +8,7 @@ import 'package:utopia_recruitment_task/models/firebase_user_model.dart';
 import 'package:utopia_recruitment_task/models/item_model.dart';
 import 'package:utopia_recruitment_task/pages/_widgets/buttons/primary_button.dart';
 import 'package:utopia_recruitment_task/pages/auth_page/auth_page.dart';
+import 'package:utopia_recruitment_task/pages/home_page/_widgets/arrow_indicator.dart';
 import 'package:utopia_recruitment_task/pages/item_page/item_page.dart';
 import 'package:utopia_recruitment_task/pages/new_item_page/new_item_page.dart';
 import 'package:utopia_recruitment_task/service/firebase_item_service.dart';
@@ -23,8 +23,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ScrollController _controller = ScrollController();
+
   late FirebaseUser _user;
   late ItemsBloc _itemsBloc;
+
+  void _scrollUp() {
+    _controller.animateTo(
+      _controller.position.minScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 
   @override
   void initState() {
@@ -38,12 +48,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildContent(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: CustomTheme.white,
-        child: const Icon(Icons.add_rounded),
-        onPressed: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const NewItemPage())),
-      ),
+      floatingActionButton: _buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
@@ -56,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: <Widget>[
         BlocListener<AppBloc, AppState>(
-          listener: (context, state) {
+          listener: (_, state) {
             if (state.user.isEmpty) {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => const AuthPage()),
@@ -84,7 +89,7 @@ class _HomePageState extends State<HomePage> {
       child: SafeArea(
         child: BlocBuilder<ItemsBloc, ItemsState>(
           bloc: _itemsBloc,
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is LoadingItemsState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is CompleteItemsState) {
@@ -104,42 +109,66 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  FloatingActionButton _buildFloatingActionButton() {
+    return FloatingActionButton(
+      backgroundColor: CustomTheme.white,
+      child: const Icon(Icons.add_rounded),
+      onPressed: () async {
+        var result = await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const NewItemPage()),
+        );
+        if (result != null) {
+          _scrollUp();
+        }
+      },
+    );
+  }
+
   Widget _buildEmpty() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(
-          'Your list is empty, press button bellow to add new items into the list.',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: CustomTheme.white,
+    return Padding(
+      padding: CustomTheme.contentPadding * 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text(
+            'Your list is empty, press button bellow to add new items into the list.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: CustomTheme.white,
+              fontSize: 16.0,
+              height: 1.5,
+            ),
           ),
-        ),
-        SizedBox(height: CustomTheme.spacing),
-        Icon(
-          Icons.arrow_downward_sharp,
-          color: CustomTheme.white,
-        )
-      ],
+          SizedBox(height: CustomTheme.spacing),
+          ArrowIndicator(),
+        ],
+      ),
     );
   }
 
   Widget _buildListView(List<Item> items) {
     return ListView(
+      controller: _controller,
       padding: CustomTheme.contentPadding,
       children: [
-        ...items.map(
-          (item) => Padding(
+        ...items.asMap().entries.map((entry) {
+          final item = entry.value;
+          return Padding(
             padding: const EdgeInsets.only(bottom: CustomTheme.spacing),
-            child: ProductItem(
-              item: item,
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ItemPage(item: item)),
-              ),
-            ),
-          ),
-        ),
+            child: ListItem(
+                index: entry.key,
+                item: item,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ItemPage(item: item)),
+                  );
+                }),
+          );
+        }),
+        const SizedBox(height: 75.0),
       ],
     );
   }

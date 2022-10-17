@@ -2,9 +2,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:utopia_recruitment_task/helpers/formz/email_input.dart';
 
+import '../constants.dart';
+
 void main() {
-  const validEmailString = 'email@gmail.com';
-  const invalidEmailString = 'email';
   group('Email', () {
     group('constructors', () {
       test('pure creates correct instance', () {
