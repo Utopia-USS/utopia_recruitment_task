@@ -3,10 +3,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:utopia_recruitment_task/helpers/formz/password_input.dart';
 
-void main() {
-  const validPasswordString = 'mockPassword123!';
-  const invalidPasswordString = 'mockPassword';
+import '../constants.dart';
 
+void main() {
   group('Password', () {
     group('constructors', () {
       test('pure creates correct instance', () {

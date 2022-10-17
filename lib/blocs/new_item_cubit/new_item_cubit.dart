@@ -40,12 +40,13 @@ class NewItemCubit extends Cubit<NewItemState> {
     ));
   }
 
-  Future<void> addItem(String uid) async {
+  Future<void> addItem(String uid, DateTime now) async {
     if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       final item = Item(
-        DateTime.now(),
+        // DateTime.now(),
+        now,
         state.name.value,
         state.note,
         state.url.value,

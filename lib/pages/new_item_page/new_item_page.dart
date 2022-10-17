@@ -135,7 +135,7 @@ class _NewItemState extends State<NewItemPage> {
             active: !state.status.isPure && !state.status.isInvalid,
             action: () {
               final user = (BlocProvider.of<AppBloc>(context).state).user;
-              _newItemCubit.addItem(user.id);
+              _newItemCubit.addItem(user.id, DateTime.now());
             },
           );
         }

@@ -14,8 +14,6 @@ class MockAuthService extends Mock implements AuthService {}
 
 class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {}
 
-// class FakeAppState extends Fake implements AppState {}
-
 void main() async {
   setupFirebaseAuthMocks();
 
