@@ -148,28 +148,28 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildListView(List<Item> items) {
-    return ListView(
+    return ListView.builder(
       controller: _controller,
-      padding: CustomTheme.contentPadding,
-      children: [
-        ...items.asMap().entries.map((entry) {
-          final item = entry.value;
-          return Padding(
-            padding: const EdgeInsets.only(bottom: CustomTheme.spacing),
-            child: ListItem(
-                index: entry.key,
-                item: item,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ItemPage(item: item)),
-                  );
-                }),
-          );
-        }),
-        const SizedBox(height: 75.0),
-      ],
+      padding: const EdgeInsets.fromLTRB(
+        CustomTheme.spacing,
+        CustomTheme.spacing,
+        CustomTheme.spacing,
+        75.0,
+      ),
+      itemCount: items.length,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.only(bottom: CustomTheme.spacing),
+        child: ListItem(
+            index: index,
+            item: items[index],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ItemPage(item: items[index])),
+              );
+            }),
+      ),
     );
   }
 
