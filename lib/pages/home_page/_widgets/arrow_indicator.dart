@@ -35,23 +35,21 @@ class _ArrowIndicatorState extends State<ArrowIndicator>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 50.0,
-      height: 100.0,
-      alignment: Alignment.topCenter,
-      child: Padding(
-        padding: EdgeInsets.only(top: _animation.value),
-        child: const SizedBox(
-          width: 50.0,
-          height: 50.0,
-          child: Icon(
-            Icons.arrow_downward_rounded,
-            color: CustomTheme.white,
-            size: 36.0,
+  Widget build(BuildContext context) => Container(
+        width: 50.0,
+        height: 100.0,
+        alignment: Alignment.topCenter,
+        child: Padding(
+          padding: EdgeInsets.only(top: _animation.value),
+          child: const SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: Icon(
+              Icons.arrow_downward_rounded,
+              color: CustomTheme.white,
+              size: 36.0,
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

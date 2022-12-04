@@ -8,18 +8,18 @@ abstract class ItemsEvent extends Equatable {
 }
 
 class GetItemsEvent extends ItemsEvent {
-  final FirebaseUser user;
-
   const GetItemsEvent(this.user);
+
+  final FirebaseUser user;
 
   @override
   List<Object> get props => [user];
 }
 
 class UpdatedItemsEvent extends ItemsEvent {
-  final List<Item> items;
-
   const UpdatedItemsEvent(this.items);
+
+  final List<Item> items;
 
   @override
   List<Object> get props => [items];

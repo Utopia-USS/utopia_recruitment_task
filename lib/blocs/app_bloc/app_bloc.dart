@@ -1,20 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:utopia_recruitment_task/service/auth_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:utopia_recruitment_task/models/firebase_user_model.dart';
+import 'package:utopia_recruitment_task/service/auth_service.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  final AuthService _authService;
-
-  late final StreamSubscription<FirebaseUser> _userSubscription;
-
   AppBloc({
-    required authService,
+    required AuthService authService,
   })  : _authService = authService,
         super(const AppState.unauthenticated()) {
     on<AppUserChanged>(_onUserChanged);
@@ -25,16 +21,21 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       (user) => add(AppUserChanged(user)),
     );
   }
+  final AuthService _authService;
+
+  late final StreamSubscription<FirebaseUser> _userSubscription;
 
   Future<void> _onUserChanged(
-      AppUserChanged event, Emitter<AppState> emit) async {
+    AppUserChanged event,
+    Emitter<AppState> emit,
+  ) async {
     try {
       if (event.user.isNotEmpty) {
         emit(AppState.authenticated(event.user));
       } else {
         emit(const AppState.unauthenticated());
       }
-    } catch (_) {
+    } on Exception catch (_) {
       unawaited(_authService.logOut());
       emit(const AppState.unauthenticated());
     }

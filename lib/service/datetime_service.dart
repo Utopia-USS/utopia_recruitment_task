@@ -1,5 +1,3 @@
 class DateTimeService {
-  DateTime now() {
-    return DateTime.now();
-  }
+  DateTime now() => DateTime.now();
 }

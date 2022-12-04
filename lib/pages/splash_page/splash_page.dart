@@ -9,55 +9,53 @@ class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<AppBloc, AppState>(
-      listener: (_, state) async {
-        if (state.status == AppStatus.authenticated) {
-          await Future.delayed(CustomTheme.splashDuration).then(
-            (_) => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute<bool>(
-                builder: (BuildContext context) => const HomePage(),
-              ),
-            ),
-          );
-        } else if (state.status == AppStatus.unauthenticated) {
-          await Future.delayed(CustomTheme.splashDuration).then(
-            (_) => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute<bool>(
-                builder: (BuildContext context) => const AuthPage(),
-              ),
-            ),
-          );
-        }
-      },
-      child: Scaffold(
-        body: Container(
-          padding: CustomTheme.pagePadding,
-          decoration: BoxDecoration(
-            gradient: CustomTheme.pageGradient,
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                CircularProgressIndicator(),
-                SizedBox(height: CustomTheme.bigSpacing * 2),
-                Text(
-                  'WELCOME',
-                  style: TextStyle(
-                    color: CustomTheme.white,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 20.0,
-                  ),
+  Widget build(BuildContext context) => BlocListener<AppBloc, AppState>(
+        listener: (_, state) async {
+          if (state.status == AppStatus.authenticated) {
+            await Future<void>.delayed(CustomTheme.splashDuration).then(
+              (_) => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const HomePage(),
                 ),
-              ],
+              ),
+            );
+          } else if (state.status == AppStatus.unauthenticated) {
+            await Future<void>.delayed(CustomTheme.splashDuration).then(
+              (_) => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const AuthPage(),
+                ),
+              ),
+            );
+          }
+        },
+        child: Scaffold(
+          body: Container(
+            padding: CustomTheme.pagePadding,
+            decoration: BoxDecoration(
+              gradient: CustomTheme.pageGradient,
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(),
+                  SizedBox(height: CustomTheme.bigSpacing * 2),
+                  Text(
+                    'WELCOME',
+                    style: TextStyle(
+                      color: CustomTheme.white,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 20.0,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

@@ -7,33 +7,31 @@ class PrimaryLoadingButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 55.0,
-      width: double.infinity,
-      child: TextButton(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
+  Widget build(BuildContext context) => SizedBox(
+        height: 55.0,
+        width: double.infinity,
+        child: TextButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all(
+              CustomTheme.darkBlue,
+            ),
+            overlayColor: MaterialStateProperty.all(
+              CustomTheme.white.withOpacity(.2),
+            ),
+            foregroundColor: MaterialStateProperty.all(
+              CustomTheme.white,
             ),
           ),
-          backgroundColor: MaterialStateProperty.all(
-            CustomTheme.darkBlue,
+          child: const CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(CustomTheme.white),
+            strokeWidth: 2.5,
           ),
-          overlayColor: MaterialStateProperty.all(
-            CustomTheme.white.withOpacity(.2),
-          ),
-          foregroundColor: MaterialStateProperty.all(
-            CustomTheme.white,
-          ),
+          onPressed: () {},
         ),
-        child: const CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(CustomTheme.white),
-          strokeWidth: 2.5,
-        ),
-        onPressed: () {},
-      ),
-    );
-  }
+      );
 }

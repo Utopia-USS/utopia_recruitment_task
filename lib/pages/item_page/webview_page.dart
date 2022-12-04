@@ -5,9 +5,9 @@ import 'package:utopia_recruitment_task/config/custom_theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebviewPage extends StatefulWidget {
-  final String url;
-
   const WebviewPage({super.key, required this.url});
+
+  final String url;
 
   @override
   State<WebviewPage> createState() => _WebviewPageState();
@@ -24,26 +24,25 @@ class _WebviewPageState extends State<WebviewPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'LINK',
-          style: CustomTheme.appBarTitle,
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          WebView(
-            initialUrl: widget.url,
-            javascriptMode: JavascriptMode.unrestricted,
-            onPageFinished: (_) => setState(() => isLoading = false),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'LINK',
+            style: CustomTheme.appBarTitle,
           ),
-          isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : Container(),
-        ],
-      ),
-    );
-  }
+        ),
+        body: Stack(
+          children: <Widget>[
+            WebView(
+              initialUrl: widget.url,
+              javascriptMode: JavascriptMode.unrestricted,
+              onPageFinished: (_) => setState(() => isLoading = false),
+            ),
+            if (isLoading)
+              const Center(child: CircularProgressIndicator())
+            else
+              Container(),
+          ],
+        ),
+      );
 }

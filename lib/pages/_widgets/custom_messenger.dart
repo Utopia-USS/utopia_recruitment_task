@@ -6,9 +6,9 @@ class CustomMessager {
   void showError({
     required BuildContext context,
     required String message,
-    duration = const Duration(seconds: 5),
+    Duration duration = const Duration(seconds: 5),
   }) {
-    Flushbar(
+    Flushbar<dynamic>(
       margin: CustomTheme.pagePadding,
       borderRadius: CustomTheme.mainRadius,
       flushbarPosition: FlushbarPosition.TOP,

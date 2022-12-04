@@ -5,18 +5,16 @@ import 'package:utopia_recruitment_task/blocs/simlpe_switch_cubit/simlpe_switch_
 import 'package:utopia_recruitment_task/config/custom_theme.dart';
 
 class PasswordInput extends StatefulWidget {
-  final TextEditingController passwordController;
-  final String? labelText;
-  final String? errorText;
-  final Function onChanged;
-
   const PasswordInput({
     Key? key,
-    required this.passwordController,
     this.labelText,
     required this.errorText,
     required this.onChanged,
   }) : super(key: key);
+
+  final String? labelText;
+  final String? errorText;
+  final void Function(String) onChanged;
 
   @override
   State<PasswordInput> createState() => _PasswordInputState();
@@ -26,16 +24,14 @@ class _PasswordInputState extends State<PasswordInput> {
   final SimlpeSwitchCubit _simlpeSwitchCubit = SimlpeSwitchCubit();
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SimlpeSwitchCubit, bool>(
-      bloc: _simlpeSwitchCubit,
-      builder: (_, state) {
-        return TextFormField(
-          controller: widget.passwordController,
+  Widget build(BuildContext context) => BlocBuilder<SimlpeSwitchCubit, bool>(
+        bloc: _simlpeSwitchCubit,
+        builder: (_, state) => TextFormField(
           decoration: InputDecoration(
             labelText: widget.labelText ?? 'Password',
             errorText: widget.errorText,
             suffixIcon: GestureDetector(
+              onTap: _simlpeSwitchCubit.onSwitch,
               child: Container(
                 width: 50.0,
                 padding: const EdgeInsets.only(right: 8.0),
@@ -48,13 +44,10 @@ class _PasswordInputState extends State<PasswordInput> {
                   ),
                 ),
               ),
-              onTap: () => _simlpeSwitchCubit.onSwitch(),
             ),
           ),
           obscureText: _simlpeSwitchCubit.state,
-          onChanged: (val) => widget.onChanged(val),
-        );
-      },
-    );
-  }
+          onChanged: widget.onChanged,
+        ),
+      );
 }
